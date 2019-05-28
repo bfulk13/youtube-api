@@ -125,6 +125,6 @@ export default {
   color: red;
 }
 .button {
-  transition: all 150ms ease;
+  transition: all 200ms ease;
 }
 </style>
