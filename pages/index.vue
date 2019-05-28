@@ -45,11 +45,15 @@
 
 <script>
 import hero from '~/components/hero.vue'
+import { mapMutations } from 'vuex';
+
+const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   components: {
     hero
   },
+
   data() {
     return {
       errors: [],
@@ -59,6 +63,9 @@ export default {
       valid: false
     }
   },
+
+  middleware: 'authenticated',
+
   methods: {
     checkForm(e) {
       e.preventDefault();
@@ -70,7 +77,7 @@ export default {
       }
 
       if (!this.validPassword(this.password)) {
-        this.errors.push('Password must contain 1 capital letter, 1 lower case letter, 1 number, and is between 6-10 characters');
+        this.errors.push('Password must contain 1 capital letter, 1 lower case letter, 1 number, and between 6-10 characters');
       }
 
       if (!this.errors.length) {
@@ -79,10 +86,12 @@ export default {
         return true;
       }
     },
+
     validEmail(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(email)
     },
+
     validPassword(pw) {
       return (
         /[A-Z]/.test(pw) &&
@@ -92,22 +101,16 @@ export default {
         pw.length <= 10
       )
     },
+
     async login() {
       if(this.valid){
-        setTimeout(() => {
-            this.$router.push('/search')
+        await setTimeout(() => {
+          this.$store.commit('SET_USER', email) // mutating to store for client rendering
+          Cookie.set('user', email) // saving token in cookie for server rendering
+          this.$router.push('/search')
         }, 1500)
       }
     }
-    // async logout() {
-    //   try {
-    //     setTimeout(() => {
-
-    //     }, 1500)
-    //   } catch (e) {
-    //     console.log(e.message)
-    //   }
-    // }
   }
 }
 </script>
