@@ -2,17 +2,27 @@
   <div>
     <h1>Search Route</h1>
     <button @click="logout">Logout</button>
+    <searchBar/>
+    <mainView/>
+    <h3>{{ $route.params.id }}</h3>
+    <sidebar/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import searchBar from '~/components/searchBar'
+import sidebar from '~/components/sidebar'
+import mainView from '~/components/mainView'
 
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
-  middleware: 'notAuthenticated',
-  computed: mapGetters(['loggedUser']),
+  components: {
+    searchBar,
+    sidebar,
+    mainView
+  },
+  middleware: ['notAuthenticated', 'search'],
   methods: {
     logout() {
       // Code will also be required to invalidate the JWT Cookie on external API
@@ -21,24 +31,6 @@ export default {
       this.$router.push('/')
     }
   }
-
-  //   data() {
-  //     return {
-  //       id: this.$route.params.id
-  //     }
-  //   },
-  //   computed: {
-  //     searchByKeyword() {
-  //       var results = YouTube.Search.list('id,snippet', {
-  //         q: 'dogs',
-  //         maxResults: 10
-  //       })
-  //       for (var i in results.items) {
-  //         var item = results.items[i]
-  //         Logger.log('[%s] Title: %s', item.id.videoId, item.snippet.title)
-  //       }
-  //     }
-  //   }
 }
 </script>
 
