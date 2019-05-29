@@ -7,13 +7,20 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: 'STG YouTuber',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+      }
+    ]
   },
 
   /*
@@ -24,20 +31,18 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~assets/app.styl'],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
-
+  plugins: ['~plugins/vuetify.js'],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    'bootstrap-vue/nuxt'
+    '@nuxtjs/axios'
   ],
   /*
    ** Axios module configuration
@@ -53,6 +58,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    vendor: ['axios, vuetify'],
     extend(config, ctx) {}
   },
   env: {

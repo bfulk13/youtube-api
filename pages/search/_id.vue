@@ -4,7 +4,6 @@
     <button @click="logout">Logout</button>
     <searchBar/>
     <mainView/>
-    <h3>{{ $route.params.id }}</h3>
     <sidebar/>
   </div>
 </template>

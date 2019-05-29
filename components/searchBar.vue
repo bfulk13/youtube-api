@@ -2,7 +2,7 @@
   <div class="container">
     <form class="search-form" @submit.prevent="submit">
       <input type="text" placeholder="search" v-model="textSearch" autofocus>
-      <button class="searchbar-icon" @click="logSearch">Search</button>
+      <v-icon class="searchbar-icon" @click="logSearch">fas fa-search</v-icon>
     </form>
   </div>
 </template>
@@ -39,7 +39,6 @@ export default {
   align-content: center;
 }
 input {
-  margin: 0 2rem;
   width: 30rem;
 }
 </style>
