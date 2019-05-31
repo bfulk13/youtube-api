@@ -3,8 +3,8 @@
     <h1>Search Route</h1>
     <button @click="logout">Logout</button>
     <searchBar/>
-    <mainView/>
-    <sidebar/>
+    <mainView style="float: left; margin: 2rem;"/>
+    <sidebar style="float: right; margin: 2rem"/>
   </div>
 </template>
 

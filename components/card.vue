@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex xs12 sm5 md5 offset-sm3>
       <v-card max-width="300px">
         <v-img :src="thumbnail" class="--text" height="200px" @click="selectVid(videoId)">
           {{thumbnail}}

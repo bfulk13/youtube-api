@@ -3,6 +3,7 @@
     <h3 class>Results for: {{ $route.params.id }}</h3>
     <div v-for="(video, index) in $store.state.vidArray">
       <card
+        style="width: 400px;"
         :title="video.snippet.title"
         :description="video.snippet.description"
         :videoId="video.id.videoId"

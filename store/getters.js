@@ -4,7 +4,7 @@ export default {
   },
   getVidProps: state => {
     return state.vidArray.filter(vid => {
-      vid.id.videoId.includes(state.mainVid) && vid
+      return vid.id.videoId.includes(state.mainVid) && vid
     })
   }
 }

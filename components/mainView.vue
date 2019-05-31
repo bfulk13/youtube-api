@@ -1,8 +1,8 @@
 <template>
   <div>
     <iframe :src="mainVidUrl" height="600px" width="900px"></iframe>
-    <h2>{{getVidProps}}</h2>
-    <!-- <p>{{getVidProps.snippet.description}}</p> -->
+    <h2 style="margin: 2rem;">{{getVidProps[0].snippet.title}}</h2>
+    <p style="margin: 2rem;">{{getVidProps[0].snippet.description}}</p>
   </div>
 </template>
 
