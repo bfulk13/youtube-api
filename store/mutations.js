@@ -4,5 +4,8 @@ export default {
   },
   GET_VIDS(state, payload){
     state.vidArray = payload
+  },
+  SET_MAIN_VID(state, payload){
+    state.mainVid = payload
   }
 }

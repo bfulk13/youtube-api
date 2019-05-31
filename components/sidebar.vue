@@ -7,7 +7,6 @@
         :description="video.snippet.description"
         :videoId="video.id.videoId"
         :thumbnail="video.snippet.thumbnails.medium.url"
-        :color="picker(index)"
         :key="video.id.videoId"
       />
     </div>
@@ -23,16 +22,8 @@ export default {
     card
   },
   middleware: 'search',
-  methods: {
-    picker(index) {
-      return index % 2 == 0 ? '#777' : '#DDD'
-    }
-  },
-  computed: {
-    vidArrayExists() {
-      return vidArray.length > 0
-    }
-  }
+  methods: {},
+  computed: {}
 }
 </script>
 

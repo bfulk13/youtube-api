@@ -2,7 +2,7 @@
   <div class="container">
     <form class="search-form" @submit.prevent="submit">
       <input type="text" placeholder="search" v-model="textSearch" autofocus>
-      <v-icon class="searchbar-icon" @click="logSearch">fas fa-search</v-icon>
+      <i class="material-icons" @click="logSearch">search</i>
     </form>
   </div>
 </template>
@@ -40,5 +40,8 @@ export default {
 }
 input {
   width: 30rem;
+}
+.material-icons {
+  cursor: pointer;
 }
 </style>

@@ -2,7 +2,7 @@
   <v-layout column>
     <v-flex xs12 sm6 offset-sm3>
       <v-card max-width="300px">
-        <v-img :src="thumbnail" class="--text" height="200px">
+        <v-img :src="thumbnail" class="--text" height="200px" @click="selectVid(videoId)">
           {{thumbnail}}
         </v-img>
         <v-card-title primary-title>
@@ -11,7 +11,7 @@
           </div>
         </v-card-title primary-title>
         <v-card-actions>
-          <v-btn flat>Like</v-btn>
+          <v-btn flat>Add Favorite</v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
             <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
@@ -32,9 +32,16 @@ export default {
   props: ['title', 'description', 'videoId', 'thumbnail'],
   data: () => ({
       show: false
-    })
+  }),
+  middleware: 'setMainVid',
+  methods: {
+    selectVid(vidId){
+      this.$store.commit('SET_MAIN_VID', vidId)
+    }
+  }
 }
 </script>
 
 <style scoped>
+
 </style>
