@@ -6,13 +6,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   middleware: 'notAuthenticated',
-  computed: mapGetters(['loggedUser']),
   methods: {
     logout() {
       // Code will also be required to invalidate the JWT Cookie on external API

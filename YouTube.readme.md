@@ -96,7 +96,7 @@ These are the events that will be emitted by the component.
 
 The first argument contains the instance of `YT.Player` at the parameter `target`.
 
-### The way of start playing video automatically
+### The way to start playing video automatically
 
 ```html
 <youtube :player-vars="{ autoplay: 1 }"></youtube>
