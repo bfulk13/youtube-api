@@ -3,14 +3,17 @@
     <v-flex xs12 sm5 md5 offset-sm3>
       <v-card class="vidCard" max-width="300px" @mouseover="mouseOver" @mouseout="mouseOut" @click="selectVid(videoId)">
         <v-img :src="thumbnail" class="--text" height="200px" >
-          {{thumbnail}}
+          {{video.snippet.thumbnail}}
         </v-img>
         <v-card-title primary-title>
           <div>
-            <div class="headline">{{title}}</div>
+            <div class="headline">{{video.snippet.title}}</div>
           </div>
         </v-card-title primary-title>
         <v-card-actions>
+          <fav-icon
+
+          />
           <v-btn @click.stop="changeFav(video)" flat>
             <i class="material-icons" v-show="active">{{ video.fav ? 'favorite' : 'favorite_border' }}</i>
           </v-btn>
@@ -31,7 +34,7 @@
 
 <script>
 export default {
-  props: ['title', 'description', 'videoId', 'thumbnail', 'video'],
+  props: ['video'],
   data: () => ({
       show: false,
       active: false

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <form class="search-form" @submit.prevent="submit">
-      <v-text-field type="text" placeholder="Search..." v-model="textSearch" fluid></v-text-field>
-      <i class="material-icons" @click="logSearch">search</i>
+      <v-text-field type="text" placeholder="Search..." v-model="searchFavs" fluid></v-text-field>
+      <i class="material-icons" @click="filterFavs">search</i>
     </form>
   </div>
 </template>
@@ -13,21 +13,17 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      textSearch: ''
+      searchFavs: ''
     }
   },
   methods: {
-    logSearch() {
-      let search = this.cleanText(this.textSearch)
-    },
+    filterFavs() {},
     cleanText(text) {
       let txt = text.toLowerCase().trim()
       txt = txt.replace(/ +/g, '')
       return txt
     },
-    submit(e) {
-      this.$router.push(`/search/${this.textSearch}`)
-    }
+    submit(e) {}
   }
 }
 </script>

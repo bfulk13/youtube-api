@@ -1,5 +1,7 @@
 export default () => ({
   user: null,
   vidArray: [],
-  mainVid: ''
+  mainVid: '',
+  favorites: [],
+  favMainVid: ''
 })

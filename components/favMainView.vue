@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     mainVidUrl() {
-      return `http://www.youtube.com/embed/${this.$store.getters.mainVidId}`
+      return `http://www.youtube.com/embed/${this.$store.getters.getFavMainVid}`
     },
     getVidProps() {
       let getVid = this.$store.getters.getVidProps[0]
