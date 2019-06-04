@@ -8,7 +8,7 @@ export default async function({ params, store }) {
         process.env.apiKey
       }`
     )
-    store.commit('GET_VIDS', res.data.items)
+    store.commit('SET_VIDS', res.data.items)
     store.commit('SET_MAIN_VID', res.data.items[0].id.videoId)
   } catch (err) {
     console.log(err)

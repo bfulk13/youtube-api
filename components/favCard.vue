@@ -3,7 +3,7 @@
     <v-flex xs12 sm5 md5 offset-sm3>
       <v-card class="vidCard" max-width="300px" @mouseover="mouseOver" @mouseout="mouseOut" @click="selectVid(videoId)">
         <v-img :src="thumbnail" class="--text" height="200px" >
-          {{video.snippet.thumbnail}}
+          {{thumbnail}}
         </v-img>
         <v-card-title primary-title>
           <div>
@@ -24,7 +24,7 @@
         </v-card-actions>
         <v-slide-y-transition>
           <v-card-text v-show="show">
-              {{description}}
+              {{video.snippet.description}}
           </v-card-text>
         </v-slide-y-transition>
       </v-card>
@@ -34,14 +34,14 @@
 
 <script>
 export default {
-  props: ['video'],
+  props: ['video', 'thumbnail', 'videoId'],
   data: () => ({
       show: false,
       active: false
   }),
   methods: {
     selectVid(vidId){
-      this.$store.commit('SET_MAIN_VID', vidId)
+      this.$store.commit('SET_FAV_MAIN_VID', vidId)
     },
     changeFav(video){
       this.video.fav

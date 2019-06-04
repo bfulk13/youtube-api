@@ -12,7 +12,7 @@
         </v-card-title primary-title>
         <v-card-actions>
           <v-btn @click.stop="changeFav(video)" flat>
-            <i class="material-icons" v-show="active">{{ video.fav ? 'favorite' : 'favorite_border' }}</i>
+            <i class="material-icons" v-show="active">{{ fav || video.fav ? 'favorite' : 'favorite_border' }}</i>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
@@ -34,16 +34,18 @@ export default {
   props: ['title', 'description', 'videoId', 'thumbnail', 'video'],
   data: () => ({
       show: false,
-      active: false
+      active: false,
+      fav: false
   }),
   methods: {
     selectVid(vidId){
       this.$store.commit('SET_MAIN_VID', vidId)
     },
     changeFav(video){
-      this.video.fav
+      this.fav = !this.fav
+      this.$bus.$emit('favChange', (this.video.fav
         ? this.$store.commit('REMOVE_FAV', video)
-        : this.$store.commit('ADD_FAV', video)
+        : this.$store.commit('ADD_FAV', video)))
     },
     mouseOver(){
       this.active = !this.active
@@ -62,10 +64,15 @@ export default {
       (state, getters) => getters.getVidProps,
       (newValue, oldValue) => {
         console.log(`Updating from ${oldValue} to ${newValue}`)
-        this.$forceUpdate()
       },
       {immediate: true}
     )
+  },
+  created(){
+    this.$bus.$on('mainFavChange', () => {
+      this.fav = !this.fav
+      return this.$store.getters.getVidProps[0]
+    })
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <iframe :src="mainVidUrl" style="height: 60rem; width: 90rem;"></iframe>
-    <h2 style="margin: 2rem;">{{getVidProps.snippet.title}}</h2>
-    <p style="margin: 2rem;">{{getVidProps.snippet.description}}</p>
-    <v-btn @click="changeFav(getVidProps)" flat>
-      <i class="material-icons">{{ getVidProps.fav ? 'favorite' : 'favorite_border' }}</i>
-    </v-btn>
+    <iframe :src="favMainVidUrl" style="height: 60rem; width: 90rem;"></iframe>
+    <!-- <h2 style="margin: 2rem;">{{getFavVidProps.snippet.title}}</h2>
+    <p style="margin: 2rem;">{{getFavVidProps.snippet.description}}</p>
+    <v-btn @click="changeFav(getFavVidProps)" flat>
+      <i class="material-icons">{{ getFavVidProps.fav ? 'favorite' : 'favorite_border' }}</i>
+    </v-btn>-->
   </div>
 </template>
 
@@ -15,7 +15,7 @@ import Vuex from 'vuex'
 export default {
   data: () => {
     return {
-      compVid: {}
+      currVid: {}
     }
   },
   methods: {
@@ -26,12 +26,12 @@ export default {
     }
   },
   computed: {
-    mainVidUrl() {
+    favMainVidUrl() {
       return `http://www.youtube.com/embed/${this.$store.getters.getFavMainVid}`
     },
-    getVidProps() {
-      let getVid = this.$store.getters.getVidProps[0]
-      this.compVid = { ...this.compVid, getVid }
+    getFavVidProps() {
+      let getVid = this.$store.getters.getFavVidProps[0]
+      this.currVid = { ...this.currVid, getVid }
       return getVid
     }
   },
@@ -40,7 +40,6 @@ export default {
       (state, getters) => getters.getVidProps,
       (newValue, oldValue) => {
         console.log(`Updating from ${oldValue} to ${newValue}`)
-        this.icon = !this.icon
       },
       { immediate: true }
     )

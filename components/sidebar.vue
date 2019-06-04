@@ -1,7 +1,7 @@
 <template>
   <div class="vidArray-container">
     <h3 class="search-result">Results for: {{ $route.params.id || 'funny' }}</h3>
-    <div v-for="(video, index) in $store.state.vidArray">
+    <div v-for="video in $store.state.vidArray">
       <card
         style="width: 400px;"
         :video="video"

@@ -1,10 +1,14 @@
 <template>
   <div class="vidArray-container">
-    <h3 class="search-result">Favorites</h3>
+    Sort by:
+    <filter-options style="font-size: 1.6rem"/>
+    <h3 class="search-result">Favorites:</h3>
     <div v-for="video in $store.state.favorites">
       <fav-card
         style="width: 400px;"
         :video="video"
+        :videoId="video.id.videoId"
+        :thumbnail="video.snippet.thumbnails.medium.url"
         :key="video.id.videoId"
       />
     </div>
@@ -14,12 +18,13 @@
 <script>
 import vuex from 'vuex'
 import favCard from '~/components/favCard'
+import filterOptions from '~/components/filterOptions'
 
 export default {
   components: {
-    favCard
+    favCard,
+    filterOptions
   },
-  middleware: 'searchFav',
   methods: {},
   computed: {
     getFavArray() {
