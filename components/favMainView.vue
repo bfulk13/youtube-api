@@ -1,9 +1,9 @@
 <template>
   <div>
     <iframe :src="favMainVidUrl" style="height: 60rem; width: 90rem;"></iframe>
-    <!-- <h2 style="margin: 2rem;">{{getFavVidProps.snippet.title}}</h2>
-    <p style="margin: 2rem;">{{getFavVidProps.snippet.description}}</p>
-    <v-btn @click="changeFav(getFavVidProps)" flat>
+    <!-- <h2 style="margin: 2rem;">{{getFavVidProps.snippet.title}}</h2> -->
+    <!-- <p style="margin: 2rem;">{{getFavVidProps.snippet.description}}</p> -->
+    <!-- <v-btn @click="changeFav(getFavVidProps)" flat>
       <i class="material-icons">{{ getFavVidProps.fav ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>-->
   </div>
@@ -15,14 +15,16 @@ import Vuex from 'vuex'
 export default {
   data: () => {
     return {
-      currVid: {}
+      currVid: {},
+      fav: true
     }
   },
   methods: {
     changeFav(video) {
-      video.fav
-        ? this.$store.commit('REMOVE_FAV', video)
-        : this.$store.commit('ADD_FAV', video)
+      this.$bus.$emit(
+        'favMainFavChange',
+        this.$store.commit('REMOVE_FAV', video)
+      )
     }
   },
   computed: {
@@ -35,14 +37,10 @@ export default {
       return getVid
     }
   },
-  mounted() {
-    this.$store.watch(
-      (state, getters) => getters.getVidProps,
-      (newValue, oldValue) => {
-        console.log(`Updating from ${oldValue} to ${newValue}`)
-      },
-      { immediate: true }
-    )
+  created() {
+    this.$bus.$on('favFavChange', () => {
+      return this.$store.getters.getFavArray
+    })
   }
 }
 </script>

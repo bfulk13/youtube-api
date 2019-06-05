@@ -16,7 +16,7 @@ export default {
     return state.favorites
   },
   getFavMainVid: state => {
-    return state.FavMainVid
+    return state.favMainVid
   }
   // sortTitle: state => {
   //   state.favorites.length > 0 &&

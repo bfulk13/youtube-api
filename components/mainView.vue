@@ -40,15 +40,6 @@ export default {
       return getVid
     }
   },
-  mounted() {
-    this.$store.watch(
-      (state, getters) => getters.getVidProps,
-      (newValue, oldValue) => {
-        console.log(`Updating from ${oldValue} to ${newValue}`)
-      },
-      { immediate: true }
-    )
-  },
   created() {
     this.$bus.$on('favChange', () => {
       this.fav = !this.fav

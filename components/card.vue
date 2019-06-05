@@ -59,15 +59,6 @@ export default {
       return this.$store.getters.getVidProps
     }
   },
-  mounted() {
-    this.$store.watch(
-      (state, getters) => getters.getVidProps,
-      (newValue, oldValue) => {
-        console.log(`Updating from ${oldValue} to ${newValue}`)
-      },
-      {immediate: true}
-    )
-  },
   created(){
     this.$bus.$on('mainFavChange', () => {
       this.fav = !this.fav
