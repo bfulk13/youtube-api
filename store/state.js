@@ -3,5 +3,6 @@ export default () => ({
   vidArray: [],
   mainVid: '',
   favorites: [],
-  favMainVid: ''
+  favMainVid: '',
+  currFavObj: {}
 })

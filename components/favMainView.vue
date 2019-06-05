@@ -1,10 +1,12 @@
 <template>
   <div>
-    <iframe :src="favMainVidUrl" style="height: 60rem; width: 90rem;"></iframe>
-    <!-- <h2 style="margin: 2rem;">{{getFavVidProps.snippet.title}}</h2> -->
-    <!-- <p style="margin: 2rem;">{{getFavVidProps.snippet.description}}</p> -->
-    <!-- <v-btn @click="changeFav(getFavVidProps)" flat>
-      <i class="material-icons">{{ getFavVidProps.fav ? 'favorite' : 'favorite_border' }}</i>
+    <iframe :src="favMainVidUrl" style="height: 60rem; width: 90rem;">
+      <span class="display-time">{{}}</span>
+    </iframe>
+    <!-- <h2 style="margin: 2rem;">{{favChange.snippet.title}}</h2>
+    <p style="margin: 2rem;">{{favChange.snippet.description}}</p>
+    <v-btn @click="changeFav(favChange)" flat>
+      <i class="material-icons">{{favChange.fav ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>-->
   </div>
 </template>
@@ -15,7 +17,6 @@ import Vuex from 'vuex'
 export default {
   data: () => {
     return {
-      currVid: {},
       fav: true
     }
   },
@@ -31,15 +32,16 @@ export default {
     favMainVidUrl() {
       return `http://www.youtube.com/embed/${this.$store.getters.getFavMainVid}`
     },
-    getFavVidProps() {
-      let getVid = this.$store.getters.getFavVidProps[0]
-      this.currVid = { ...this.currVid, getVid }
-      return getVid
+    getCurrFavObj() {
+      return this.$store.getters.getCurrFavObj
     }
   },
   created() {
     this.$bus.$on('favFavChange', () => {
       return this.$store.getters.getFavArray
+    })
+    this.$bus.$on('favChange', () => {
+      return this.$store.getters.getCurrFavObj
     })
   }
 }

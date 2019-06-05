@@ -1,4 +1,5 @@
 const cookieparser = process.server ? require('cookieparser') : undefined
+import axios from 'axios'
 
 export default {
   nuxtServerInit({ commit }, { req }) {
@@ -13,5 +14,38 @@ export default {
       }
     }
     commit('SET_USER', user)
+  },
+  async setVidLength({ commit }, id) {
+    try {
+      let res = await axios.get(
+        `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${
+          process.env.apiKey
+        }`
+      )
+      const { duration } = res.data.items[0].contentDetails
+
+      let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
+
+      match = match.slice(1).map(function(x) {
+        if (x != null) {
+          return x.replace(/\D/, '')
+        }
+      })
+
+      let hours = parseInt(match[0]) || 0
+      let minutes = parseInt(match[1]) || 0
+      let seconds = parseInt(match[2]) || 0
+
+      let myObj = {}
+
+      myObj.id = id
+      myObj.totalSecs = hours * 3600 + minutes * 60 + seconds
+      myObj.length = `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
+        seconds < 10 ? '0' + seconds : seconds
+      }`
+      commit('SET_VID_LENGTH', myObj)
+    } catch (err) {
+      console.log(err)
+    }
   }
 }

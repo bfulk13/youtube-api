@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import Vuex from 'vuex'
+import Vuex, { mapActions } from 'vuex'
 
 export default {
   data: () => {
     return {
-      compVid: {},
       fav: false
     }
   },
@@ -26,7 +25,8 @@ export default {
         'mainFavChange',
         video.fav
           ? this.$store.commit('REMOVE_FAV', video)
-          : this.$store.commit('ADD_FAV', video)
+          : (this.$store.commit('ADD_FAV', video),
+            this.$store.dispatch(setVidLength(video.id.videoId)))
       )
     }
   },
@@ -35,9 +35,7 @@ export default {
       return `http://www.youtube.com/embed/${this.$store.getters.mainVidId}`
     },
     getVidProps() {
-      let getVid = this.$store.getters.getVidProps[0]
-      this.compVid = { ...this.compVid, getVid }
-      return getVid
+      return this.$store.getters.getVidProps[0]
     }
   },
   created() {

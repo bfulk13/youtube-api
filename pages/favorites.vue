@@ -21,7 +21,7 @@ export default {
     favMainView,
     favSidebar
   },
-  middleware: 'notAuthenticated',
+  middleware: ['notAuthenticated'],
   methods: {
     logout() {
       // Code will also be required to invalidate the JWT Cookie on external API

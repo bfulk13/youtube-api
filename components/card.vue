@@ -12,7 +12,7 @@
         </v-card-title primary-title>
         <v-card-actions>
           <v-btn @click.stop="changeFav(video)" flat>
-            <i class="material-icons" v-show="active">{{ fav || video.fav ? 'favorite' : 'favorite_border' }}</i>
+            <i class="material-icons" v-show="active">{{ video.fav || fav ? 'favorite' : 'favorite_border' }}</i>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Vuex, { mapActions } from 'vuex'
+
 export default {
   props: ['title', 'description', 'videoId', 'thumbnail', 'video'],
   data: () => ({
@@ -45,8 +47,12 @@ export default {
       this.fav = !this.fav
       this.$bus.$emit('favChange', (this.video.fav
         ? this.$store.commit('REMOVE_FAV', video)
-        : this.$store.commit('ADD_FAV', video)))
+        : (this.$store.commit('ADD_FAV', video),
+          this.$store.dispatch('setVidLength', video.id.videoId))))
     },
+    ...mapActions([
+      'setVidLength(video.id.videoId)',
+    ]),
     mouseOver(){
       this.active = !this.active
     },
