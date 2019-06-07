@@ -6,13 +6,14 @@
           {{thumbnail}}
         </v-img>
         <v-card-title primary-title>
+          <p>{{video.length}}</p>
           <div>
-            <div class="headline">{{title}}</div>
+            <div class="headline">{{video.snippet.title}}</div>
           </div>
         </v-card-title primary-title>
         <v-card-actions>
           <v-btn @click.stop="changeFav(video)" flat>
-            <i class="material-icons" v-show="active">{{ fav || video.fav  ? 'favorite' : 'favorite_border' }}</i>
+            <i class="material-icons" v-show="active">{{ 'favorite' }}</i>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
@@ -21,7 +22,7 @@
         </v-card-actions>
         <v-slide-y-transition>
           <v-card-text v-show="show">
-              {{description}}
+              {{video.snippet.description}}
           </v-card-text>
         </v-slide-y-transition>
       </v-card>
@@ -30,32 +31,21 @@
 </template>
 
 <script>
-import Vuex, { mapActions } from 'vuex'
-
 export default {
-  props: ['title', 'description', 'videoId', 'thumbnail', 'video'],
+  props: ['video', 'thumbnail', 'videoId'],
   data: () => ({
       show: false,
-      active: false,
-      fav: false
+      active: false
   }),
   methods: {
     selectVid(vidId){
-      this.$store.commit('SET_MAIN_VID', vidId)
+      this.$store.commit('SET_FAV_MAIN_VID', vidId)
     },
     changeFav(video){
-      this.fav = !this.fav
-      this.$bus.$emit(
-        'favChange',
-        (this.video.fav
-        ? (this.$store.commit('REMOVE_FAV', video), (this.fav = false))
-        : (this.$store.commit('ADD_FAV', video),
-          this.fav = true,
-          this.$store.dispatch('setVidLength', video.id.videoId))))
+      this.$bus.$emit('favFavChange',
+      this.$store.commit('REMOVE_FAV', video))
+      return this.$store.getters.getFavArray
     },
-    ...mapActions([
-      'setVidLength(video.id.videoId)',
-    ]),
     mouseOver(){
       this.active = !this.active
     },
@@ -64,14 +54,13 @@ export default {
     }
   },
   computed: {
-    getVidProps(){
-      return this.$store.getters.getVidProps
+    getFavVidProps(){
+      return this.$store.getters.getFavVidProps
     }
   },
   created(){
-    this.$bus.$on('mainFavChange', () => {
-      this.fav = this.$store.getters.getVidProps.fav
-      return this.$store.getters.getVidProps
+    this.$bus.$on('favMainFavChange', () => {
+      return this.$store.getters.getFavArray
     })
   }
 }
@@ -80,8 +69,5 @@ export default {
 <style scoped>
 .vidCard:hover {
   cursor: pointer;
-}
-.material-icons {
-
 }
 </style>

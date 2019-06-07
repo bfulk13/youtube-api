@@ -2,7 +2,6 @@
   <div class="container">
     <form class="search-form" @submit.prevent="submit">
       <v-text-field type="text" placeholder="Search..." v-model="textSearch" fluid></v-text-field>
-      <v-spacer></v-spacer>
       <i class="material-icons" @click="logSearch">search</i>
     </form>
   </div>
@@ -19,11 +18,7 @@ export default {
   },
   methods: {
     logSearch() {
-      if (this.textSearch) {
-        let search = this.cleanText(this.textSearch)
-      } else {
-        let search = 'basketball'
-      }
+      let search = this.cleanText(this.textSearch)
     },
     cleanText(text) {
       let txt = text.toLowerCase().trim()
@@ -44,7 +39,7 @@ export default {
   align-content: center;
 }
 input {
-  width: 30rem;
+  width: 300px;
 }
 .material-icons {
   cursor: pointer;

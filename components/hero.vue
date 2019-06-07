@@ -31,18 +31,18 @@ export default {}
 }
 
 .header-container > h1 {
-  margin: 1rem;
-  font-size: 3rem;
+  margin: 10px;
+  font-size: 30px;
 }
 
 .links {
   display: flex;
   justify-content: flex-end;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .links > * {
   text-decoration: none;
-  margin: 1rem 2rem;
+  margin: 10px 20px;
 }
 </style>
