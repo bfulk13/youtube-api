@@ -11,7 +11,7 @@
       </select>
     </form>
     <h3 class="search-result">Favorites:</h3>
-    <div v-for="video in favArray">
+    <div v-for="video in getFavArray">
       <fav-card
         style="width: 400px;"
         :video="video"
@@ -38,8 +38,13 @@ export default {
   components: {
     favCard
   },
-  mounted() {
-    this.favArray = this.$store.getters.getFavArray
+  beforeMount() {
+    this.$bus.$on('favFavChange', () => {
+      this.favArray = this.$store.getters.getFavArray
+    }),
+      this.$bus.$on('favMainFavChange', () => {
+        this.favArray = this.$store.getters.getFavArray
+      })
   },
   computed: {
     // ...mapGetters([
@@ -49,6 +54,9 @@ export default {
     //   'sortLengthLong',
     //   'sortDateNew'
     // ]),
+    getFavArray() {
+      return this.$store.getters.getFavArray
+    },
     handleFilter: function() {
       switch (this.filter) {
         case 'title':

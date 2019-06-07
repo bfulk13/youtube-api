@@ -13,7 +13,7 @@
         </v-card-title primary-title>
         <v-card-actions>
           <v-btn @click.stop="changeFav(video)" flat>
-            <i class="material-icons" v-show="active">{{ video.fav ? 'favorite' : 'favorite_border' }}</i>
+            <i class="material-icons" v-show="active">{{ 'favorite' }}</i>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
@@ -35,8 +35,7 @@ export default {
   props: ['video', 'thumbnail', 'videoId'],
   data: () => ({
       show: false,
-      active: false,
-      fav: true
+      active: false
   }),
   methods: {
     selectVid(vidId){
@@ -55,8 +54,8 @@ export default {
     }
   },
   computed: {
-    getVidProps(){
-      return this.$store.getters.getVidProps
+    getFavVidProps(){
+      return this.$store.getters.getFavVidProps
     }
   },
   created(){

@@ -4,7 +4,7 @@
     <h2 class="video-title">{{getFavArray > 0 ? getCurrFavObj.snippet.title : ''}}</h2>
     <p class="video-description">{{getFavArray > 0 ? getCurrFavObj.snippet.description : ''}}</p>
     <v-btn @click="changeFav(getCurrFavObj)" flat>
-      <i class="material-icons">{{ getCurrFavObj.fav ? 'favorite' : 'favorite_border' }}</i>
+      <i class="material-icons">{{ getFavArray.length > 0 ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>
   </div>
 </template>
@@ -14,9 +14,7 @@ import Vuex from 'vuex'
 
 export default {
   data: () => {
-    return {
-      fav: true
-    }
+    return {}
   },
   methods: {
     changeFav(video) {
@@ -39,7 +37,7 @@ export default {
   },
   created() {
     this.$bus.$on('favFavChange', () => {
-      return this.$store.getters.getFavArray
+      return this.$store.getters.getFavArray, this.$store.getters.getCurrFavObj
     })
     this.$bus.$on('favChange', () => {
       return this.$store.getters.getCurrFavObj
