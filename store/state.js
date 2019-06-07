@@ -3,11 +3,7 @@ export default () => ({
   vidArray: [],
   mainVid: '',
   favorites: [],
+  filteredFavs: [],
   favMainVid: '',
-  currFavObj: {},
-  sortTitle: [],
-  sortDateNew: [],
-  sortDateOld: [],
-  sortLengthShort: [],
-  sortLengthLong: []
+  currFavObj: {}
 })

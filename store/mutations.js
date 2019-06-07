@@ -43,7 +43,31 @@ export default {
     state.favorites = newArr
     return newArr
   },
-  SORT_TITLE(state) {
+  FILTER_FAVS(state, payload) {
+    try {
+      let newArr = []
+      state.favorites.filter(vid => {
+        const { title, description } = vid.snippet
+        const { videoId } = vid.id
+        let lowerT = title.toLowerCase()
+        let lowerD = description.toLowerCase()
+        let lowerV = videoId.toLowerCase()
+        lowerT.includes(payload) && newArr.push(vid)
+        lowerD.includes(payload) && newArr.push(vid)
+        lowerV.includes(payload) && newArr.push(vid)
+      })
+      let removeDuplicates = [...new Set(newArr)]
+      removeDuplicates.length > 0
+        ? (state.filteredFavs = removeDuplicates)
+        : alert('No favorites match your search!')
+      removeDuplicates.length > 0 &&
+        ((state.favMainVid = removeDuplicates[0].id.videoId),
+        (state.currFavObj = removeDuplicates[0]))
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  ORDER_BY_TITLE(state) {
     const { favorites } = state
     favorites.length > 0 &&
       favorites.sort((a, b) => {
@@ -53,9 +77,9 @@ export default {
         if (titleB < titleA) return 1
         return 0
       })
-    state.sortTitle = favorites
+    state.favorites = favorites
   },
-  SORT_DATE_NEW(state) {
+  ORDER_BY_DATE(state) {
     const { favorites } = state
     favorites.length > 0 &&
       favorites.sort((a, b) => {
@@ -63,31 +87,9 @@ export default {
         let dateB = b.date
         dateA > dateB ? -1 : 1
       })
-    state.sortDateNew = favorites
+    state.favorites = favorites
   },
-  SORT_DATE_OLD(state) {
-    const { favorites } = state
-    favorites.length > 0 &&
-      favorites.sort((a, b) => {
-        let dateA = a.date
-        let dateB = b.date
-        dateA < dateB ? -1 : 1
-      })
-    state.sortDateOld = favorites
-  },
-  SORT_LENGTH_SHORT(state) {
-    const { favorites } = state
-    favorites.length > 0 &&
-      favorites.sort((a, b) => {
-        let x = a.totalSecs
-        let y = b.totalSecs
-        if (x > y) return -1
-        if (y > x) return 1
-        return 0
-      })
-    state.sortLengthShort = favorites
-  },
-  SORT_LENGTH_LONG(state) {
+  ORDER_LENGTH_SHORT(state) {
     const { favorites } = state
     favorites.length > 0 &&
       favorites.sort((a, b) => {
@@ -97,6 +99,18 @@ export default {
         if (y < x) return 1
         return 0
       })
-    state.sortLengthLong = favorites
+    state.favorites = favorites
+  },
+  ORDER_LENGTH_LONG(state) {
+    const { favorites } = state
+    favorites.length > 0 &&
+      favorites.sort((a, b) => {
+        let x = a.totalSecs
+        let y = b.totalSecs
+        if (x > y) return -1
+        if (y > x) return 1
+        return 0
+      })
+    state.favorites = favorites
   }
 }

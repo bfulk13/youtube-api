@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="search-form" @submit.prevent="submit">
+    <form class="search-form" @submit.prevent="filterFavs(searchFavs)">
       <v-text-field type="text" placeholder="Search Favorites..." v-model="searchFavs" fluid></v-text-field>
       <i class="material-icons" @click="filterFavs">search</i>
     </form>
@@ -25,21 +25,12 @@ export default {
       txt = txt.replace(/ +/g, '')
       return txt
     },
-    submit(e) {
-
-    }
-  },
-  computed: {
-    getFilteredFavs() {
-      let newArr = []
-      favArr.filter(vid => {
-        const { title, description } = vid.snippet
-        const { videoId } = vid.id
-        title.includes(this.searchFavs) && newArr.push(vid)
-        description.includes(this.searchFavs) && newArr.push(vid)
-        videoId.includes(this.searchFavs) && newArr.push(vid)
-      })
-      return newArr
+    filterFavs(search) {
+      console.log({ search })
+      this.$bus.$emit(
+        'filterFavs',
+        search && this.$store.commit('FILTER_FAVS', search)
+      )
     }
   }
 }

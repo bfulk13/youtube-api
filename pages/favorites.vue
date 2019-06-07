@@ -31,11 +31,10 @@ export default {
     }
   },
   beforeMount() {
-    this.$store.commit('SORT_TITLE')
-    this.$store.commit('SORT_DATE_OLD')
-    this.$store.commit('SORT_LENGTH_SHORT')
-    this.$store.commit('SORT_LENGTH_LONG')
-    this.$store.commit('SORT_DATE_NEW')
+    this.$store.commit('ORDER_BY_TITLE')
+    this.$store.commit('ORDER_BY_DATE')
+    this.$store.commit('ORDER_LENGTH_SHORT')
+    this.$store.commit('ORDER_LENGTH_LONG')
   }
 }
 </script>

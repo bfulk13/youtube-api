@@ -4,14 +4,14 @@
     <form @submit.prevent="handleFilter">
       <select style="font-size: 18px;" v-model="filter">
         <option value="title">Title</option>
-        <option value="date recent">Recent</option>
-        <option value="date old">Old</option>
+        <option value="date">Recent</option>
         <option value="length short">Short Video Length</option>
         <option value="length long">Long Video Length</option>
       </select>
     </form>
     <h3 class="search-result">Favorites:</h3>
-    <div v-for="video in getFavArray">
+
+    <div v-for="video in favArray">
       <fav-card
         style="width: 400px;"
         :video="video"
@@ -31,52 +31,54 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      filter: 'date recent',
+      filter: 'date',
       favArray: []
     }
   },
   components: {
     favCard
   },
-  beforeMount() {
-    this.$bus.$on('favFavChange', () => {
-      this.favArray = this.$store.getters.getFavArray
-    }),
-      this.$bus.$on('favMainFavChange', () => {
-        this.favArray = this.$store.getters.getFavArray
-      })
-  },
   computed: {
-    // ...mapGetters([
-    //   'sortTitle',
-    //   'sortDateOld',
-    //   'sortLengthShort',
-    //   'sortLengthLong',
-    //   'sortDateNew'
-    // ]),
-    getFavArray() {
-      return this.$store.getters.getFavArray
-    },
-    handleFilter: function() {
-      switch (this.filter) {
+    ...mapGetters(['filterOrder', 'filterFavs', 'getFavArray'])
+  },
+  methods: {
+    handleFilter: function(val) {
+      switch (val) {
         case 'title':
-          return 'sortTitle'
+          this.$store.commit('ORDER_BY_TITLE')
           break
-        case 'date recent':
-          return 'sortDateNew'
-          break
-        case 'date old':
-          return 'sortDateOld'
+        case 'date':
+          this.$store.commit('ORDER_BY_DATE')
           break
         case 'length short':
-          return 'sortLengthShort'
+          this.$store.commit('ORDER_LENGTH_SHORT')
           break
         case 'length long':
-          return 'sortLengthLong'
+          this.$store.commit('ORDER_LENGTH_LONG')
           break
         default:
           break
       }
+    }
+  },
+  created() {
+    ;(this.favArray = this.$store.getters.getFavArray),
+      this.$bus.$on('favFavChange', () => {
+        return (this.favArray = this.$store.getters.filterFavs)
+      }),
+      this.$bus.$on('favMainFavChange', () => {
+        return (this.favArray = this.$store.getters.filterFavs)
+      }),
+      this.$bus.$on('filterFavs', val => {
+        val
+          ? (this.favArray = this.$store.getters.filterFavs)
+          : (this.favArray = this.$store.getters.filterOrder)
+      })
+  },
+  watch: {
+    filter: async function(newVal, oldVal) {
+      await this.handleFilter(newVal)
+      this.favArray = this.$store.getters.filterOrder
     }
   }
 }

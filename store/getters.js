@@ -21,19 +21,10 @@ export default {
   getCurrFavObj: state => {
     return state.currFavObj
   },
-  sortTitle: state => {
-    return state.sortTitle
+  filterFavs: state => {
+    return state.filterFavs
   },
-  sortDateNew: state => {
-    return state.sortDateNew
-  },
-  sortDateOld: state => {
-    return state.sortDateOld
-  },
-  sortLengthShort: state => {
-    return state.sortLengthShort
-  },
-  sortLengthLong: state => {
-    return state.sortLengthLong
+  filterOrder: state => {
+    return state.favorites
   }
 }
