@@ -1,6 +1,6 @@
 <template>
   <div class="vidArray-container">
-    Sort by:
+    Filter by:
     <form @submit.prevent="handleFilter">
       <select style="font-size: 18px;" v-model="filter">
         <option value="title">Title</option>
@@ -69,10 +69,8 @@ export default {
       this.$bus.$on('favMainFavChange', () => {
         return (this.favArray = this.$store.getters.filterFavs)
       }),
-      this.$bus.$on('filterFavs', val => {
-        val
-          ? (this.favArray = this.$store.getters.filterFavs)
-          : (this.favArray = this.$store.getters.filterOrder)
+      this.$bus.$on('filterFavs', () => {
+        this.favArray = this.$store.getters.filterFavs
       })
   },
   watch: {

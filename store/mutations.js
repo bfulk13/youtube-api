@@ -41,6 +41,7 @@ export default {
       ? (state.favMainVid = newArr[0].id.videoId)
       : (state.favMainVid = '')
     state.favorites = newArr
+    state.filteredFavs = newArr
     return newArr
   },
   FILTER_FAVS(state, payload) {
@@ -56,7 +57,9 @@ export default {
         lowerD.includes(payload) && newArr.push(vid)
         lowerV.includes(payload) && newArr.push(vid)
       })
+      console.log({ newArr })
       let removeDuplicates = [...new Set(newArr)]
+      console.log({ removeDuplicates })
       removeDuplicates.length > 0
         ? (state.filteredFavs = removeDuplicates)
         : alert('No favorites match your search!')

@@ -22,7 +22,7 @@ export default {
     return state.currFavObj
   },
   filterFavs: state => {
-    return state.filterFavs
+    return state.filteredFavs
   },
   filterOrder: state => {
     return state.favorites
