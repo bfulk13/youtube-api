@@ -39,7 +39,7 @@ export default {
   align-content: center;
 }
 input {
-  width: 30rem;
+  width: 300px;
 }
 .material-icons {
   cursor: pointer;

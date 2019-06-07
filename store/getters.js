@@ -19,28 +19,21 @@ export default {
     return state.favMainVid
   },
   getCurrFavObj: state => {
-    return state.getCurrFavObj
+    return state.currFavObj
+  },
+  sortTitle: state => {
+    return state.sortTitle
+  },
+  sortDateNew: state => {
+    return state.sortDateNew
+  },
+  sortDateOld: state => {
+    return state.sortDateOld
+  },
+  sortLengthShort: state => {
+    return state.sortLengthShort
+  },
+  sortLengthLong: state => {
+    return state.sortLengthLong
   }
-  // sortTitle: state => {
-  //   state.favorites.length > 0 &&
-  //     state.favorites.snippet.title.sort((a, b) => {
-  //       let titleA = a.title.toLowerCase()
-  //       let titleB = b.title.toLowerCase()
-  //       if (titleA < titleB) return -1
-  //       if (titleB < titleA) return 1
-  //       return 0
-  //     })
-  // },
-  // sortDateNew: state => {
-  //   state.favorites.length > 0 && state.favorites.date.sort((a, b) => a - b)
-  // },
-  // sortDateOld: state => {
-  //   state.favorites.length > 0 && state.favorites.date.sort((a, b) => b - a)
-  // },
-  // sortLengthShort: state => {
-  //   state.favorites.length > 0 && state.favorites.length.sort((a, b) => a - b)
-  // },
-  // sortLengthLong: state => {
-  //   state.favorites.length > 0 && state.favorites.length.sort((a, b) => b - a)
-  // }
 }

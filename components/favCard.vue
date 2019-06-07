@@ -6,6 +6,7 @@
           {{thumbnail}}
         </v-img>
         <v-card-title primary-title>
+          <p>{{video.length}}</p>
           <div>
             <div class="headline">{{video.snippet.title}}</div>
           </div>
@@ -44,6 +45,7 @@ export default {
     changeFav(video){
       this.$bus.$emit('favFavChange',
       this.$store.commit('REMOVE_FAV', video))
+      return this.$store.getters.getFavArray
     },
     mouseOver(){
       this.active = !this.active
@@ -61,7 +63,6 @@ export default {
     this.$bus.$on('favMainFavChange', () => {
       return this.$store.getters.getFavArray
     })
-
   }
 }
 </script>

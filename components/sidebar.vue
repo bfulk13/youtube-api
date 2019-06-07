@@ -31,9 +31,9 @@ export default {
 
 <style scoped>
 .vidArray-container {
-  margin: 0 2rem 0 0;
+  margin: 0 20px 0 0;
 }
 .search-result {
-  margin: 2rem;
+  margin: 20px;
 }
 </style>

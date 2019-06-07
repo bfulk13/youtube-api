@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     filterFavs() {
-      let search = this.cleanText(this.searchFavs)
+      return this.cleanText(this.searchFavs)
     },
     cleanText(text) {
       let txt = text.toLowerCase().trim()
@@ -26,16 +26,20 @@ export default {
       return txt
     },
     submit(e) {
-      let favArr = this.$store.getters.getFavArray
-      let filterAll = favArr.filter(fav => {
-        toLowerCase().includes(this.searchFavs.toLowerCase())
-      });
-      let filterDate = fav
+
     }
   },
   computed: {
-    getFavArray(){
-      return this.$store.getters.getFavArray
+    getFilteredFavs() {
+      let newArr = []
+      favArr.filter(vid => {
+        const { title, description } = vid.snippet
+        const { videoId } = vid.id
+        title.includes(this.searchFavs) && newArr.push(vid)
+        description.includes(this.searchFavs) && newArr.push(vid)
+        videoId.includes(this.searchFavs) && newArr.push(vid)
+      })
+      return newArr
     }
   }
 }
@@ -48,7 +52,7 @@ export default {
   align-content: center;
 }
 input {
-  width: 30rem;
+  width: 300px;
 }
 .material-icons {
   cursor: pointer;

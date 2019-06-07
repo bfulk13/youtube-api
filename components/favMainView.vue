@@ -1,13 +1,11 @@
 <template>
   <div>
-    <iframe :src="favMainVidUrl" style="height: 60rem; width: 90rem;">
-      <span class="display-time">{{}}</span>
-    </iframe>
-    <!-- <h2 style="margin: 2rem;">{{favChange.snippet.title}}</h2>
-    <p style="margin: 2rem;">{{favChange.snippet.description}}</p>
-    <v-btn @click="changeFav(favChange)" flat>
-      <i class="material-icons">{{favChange.fav ? 'favorite' : 'favorite_border' }}</i>
-    </v-btn>-->
+    <iframe :src="favMainVidUrl" style="height: 600px; width: 900px;"></iframe>
+    <h2 class="video-title">{{getFavArray > 0 ? getCurrFavObj.snippet.title : ''}}</h2>
+    <p class="video-description">{{getFavArray > 0 ? getCurrFavObj.snippet.description : ''}}</p>
+    <v-btn @click="changeFav(getCurrFavObj)" flat>
+      <i class="material-icons">{{ getCurrFavObj.fav ? 'favorite' : 'favorite_border' }}</i>
+    </v-btn>
   </div>
 </template>
 
@@ -34,6 +32,9 @@ export default {
     },
     getCurrFavObj() {
       return this.$store.getters.getCurrFavObj
+    },
+    getFavArray() {
+      return this.$store.getters.getFavArray
     }
   },
   created() {
@@ -48,4 +49,11 @@ export default {
 </script>
 
 <style scoped>
+.video-title {
+  margin: 20px;
+}
+
+.video-description {
+  margin: 20px;
+}
 </style>

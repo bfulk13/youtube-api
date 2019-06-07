@@ -12,7 +12,7 @@
         </v-card-title primary-title>
         <v-card-actions>
           <v-btn @click.stop="changeFav(video)" flat>
-            <i class="material-icons" v-show="active">{{ video.fav || fav ? 'favorite' : 'favorite_border' }}</i>
+            <i class="material-icons" v-show="active">{{ fav || video.fav  ? 'favorite' : 'favorite_border' }}</i>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
@@ -45,9 +45,12 @@ export default {
     },
     changeFav(video){
       this.fav = !this.fav
-      this.$bus.$emit('favChange', (this.video.fav
-        ? this.$store.commit('REMOVE_FAV', video)
+      this.$bus.$emit(
+        'favChange',
+        (this.video.fav
+        ? (this.$store.commit('REMOVE_FAV', video), (this.fav = false))
         : (this.$store.commit('ADD_FAV', video),
+          this.fav = true,
           this.$store.dispatch('setVidLength', video.id.videoId))))
     },
     ...mapActions([
@@ -67,8 +70,8 @@ export default {
   },
   created(){
     this.$bus.$on('mainFavChange', () => {
-      this.fav = !this.fav
-      return this.$store.getters.getVidProps[0]
+      this.fav = this.$store.getters.getVidProps.fav
+      return this.$store.getters.getVidProps
     })
   }
 }
@@ -77,5 +80,8 @@ export default {
 <style scoped>
 .vidCard:hover {
   cursor: pointer;
+}
+.material-icons {
+
 }
 </style>

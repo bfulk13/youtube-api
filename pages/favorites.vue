@@ -3,8 +3,8 @@
     <h1>Favorites Route</h1>
     <button @click="logout">Logout</button>
     <favSearch/>
-    <favMainView style="float: left; margin: 2rem;"/>
-    <favSidebar style="float: right; margin: 2rem"/>
+    <favMainView style="float: left; margin: 20px;"/>
+    <favSidebar style="float: right; margin: 20px"/>
   </div>
 </template>
 
@@ -30,7 +30,13 @@ export default {
       this.$router.push('/')
     }
   },
-  mounted() {}
+  beforeMount() {
+    this.$store.commit('SORT_TITLE')
+    this.$store.commit('SORT_DATE_OLD')
+    this.$store.commit('SORT_LENGTH_SHORT')
+    this.$store.commit('SORT_LENGTH_LONG')
+    this.$store.commit('SORT_DATE_NEW')
+  }
 }
 </script>
 

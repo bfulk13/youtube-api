@@ -4,5 +4,10 @@ export default () => ({
   mainVid: '',
   favorites: [],
   favMainVid: '',
-  currFavObj: {}
+  currFavObj: {},
+  sortTitle: [],
+  sortDateNew: [],
+  sortDateOld: [],
+  sortLengthShort: [],
+  sortLengthLong: []
 })
