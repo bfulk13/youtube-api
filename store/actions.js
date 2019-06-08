@@ -1,6 +1,8 @@
 const cookieparser = process.server ? require('cookieparser') : undefined
 import axios from 'axios'
 
+// #actions with NUXT
+
 export default {
   nuxtServerInit({ commit }, { req }) {
     let user = null
@@ -40,6 +42,7 @@ export default {
 
       myObj.id = id
       myObj.totalSecs = hours * 3600 + minutes * 60 + seconds
+      // #template literal string es6 feature
       myObj.length = `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
         seconds < 10 ? '0' + seconds : seconds
       }`

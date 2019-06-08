@@ -30,9 +30,11 @@
 </template>
 
 <script>
+// #components are all in the component folder
 import Vuex, { mapActions } from 'vuex'
 
 export default {
+  // #receiving props passed from sidebar component
   props: ['title', 'description', 'videoId', 'thumbnail', 'video'],
   data: () => ({
       show: false,
@@ -40,11 +42,13 @@ export default {
       fav: false
   }),
   methods: {
+    // #Event handling
     selectVid(vidId){
       this.$store.commit('SET_MAIN_VID', vidId)
     },
     changeFav(video){
       this.fav = !this.fav
+      // #Event bus
       this.$bus.$emit(
         'favChange',
         (this.video.fav
@@ -56,10 +60,13 @@ export default {
     ...mapActions([
       'setVidLength(video.id.videoId)',
     ]),
+    // #Event handling
     mouseOver(){
+      // #this keyword referring to the data object
       this.active = !this.active
     },
     mouseOut(){
+      // #v-show directive
       this.active = !this.active
     }
   },
@@ -69,6 +76,7 @@ export default {
     }
   },
   created(){
+    // #callback arrow function
     this.$bus.$on('mainFavChange', () => {
       this.fav = this.$store.getters.getVidProps.fav
       return this.$store.getters.getVidProps

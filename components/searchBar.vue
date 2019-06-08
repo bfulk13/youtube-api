@@ -13,6 +13,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      // #Reactive data object property
       textSearch: ''
     }
   },

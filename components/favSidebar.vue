@@ -2,6 +2,7 @@
   <div class="vidArray-container">
     Filter by:
     <form @submit.prevent="handleFilter">
+      <!-- #inline style -->
       <select style="font-size: 18px;" v-model="filter">
         <option value="title">Title</option>
         <option value="date">Recent</option>
@@ -11,6 +12,7 @@
     </form>
     <h3 class="search-result">Favorites:</h3>
 
+    <!-- #list and keys along with #inline styling -->
     <div v-for="video in favArray">
       <fav-card
         style="width: 400px;"
@@ -74,6 +76,7 @@ export default {
       })
   },
   watch: {
+    // #async/await function -- promise
     filter: async function(newVal, oldVal) {
       await this.handleFilter(newVal)
       this.favArray = this.$store.getters.filterOrder
@@ -83,6 +86,7 @@ export default {
 </script>
 
 <style scoped>
+/* #scoped style */
 .vidArray-container {
   margin: 0 20px 0 0;
 }

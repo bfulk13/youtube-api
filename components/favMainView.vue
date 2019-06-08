@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    console.log('hit')
+    // #Lifecycle hook
   },
   computed: {
     favMainVidUrl() {
@@ -40,6 +40,7 @@ export default {
       return this.$store.getters.getFavArray
     }
   },
+  // #Lifecycle hook
   created() {
     ;(this.favObj = this.$store.getters.getCurrFavObj),
       this.$bus.$on('favFavChange', () => {

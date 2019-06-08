@@ -2,15 +2,18 @@
   <div>
     <h1 v-if="!valid">Please login to see content</h1>
     <form @submit="checkForm" novalidate="true">
+      <!-- #v-if directive -->
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
         <ul>
+          <!-- #list -->
           <li v-for="error in errors">{{ error }}</li>
         </ul>
       </p>
       <div class="container" id="app">
         <p>
           <label for="email">Email</label>
+          <!-- #v-model directive -->
           <input
             id="email"
             v-model="email"
