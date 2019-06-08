@@ -39,6 +39,7 @@ export default {
   }),
   methods: {
     selectVid(vidId){
+      // #Currying and closure
       this.$store.commit('SET_FAV_MAIN_VID', vidId)
     },
     changeFav(video){
@@ -54,10 +55,12 @@ export default {
     }
   },
   computed: {
+    // #computed properties are form of memoization
     getFavVidProps(){
       return this.$store.getters.getFavVidProps
     }
   },
+  // #Lifecycle hook
   created(){
     this.$bus.$on('favMainFavChange', () => {
       return this.$store.getters.getFavArray

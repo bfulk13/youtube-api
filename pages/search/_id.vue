@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// #Routing in NUXT is setting up files in pages, `_id.vue` is a route with params
 import searchBar from '~/components/searchBar'
 import sidebar from '~/components/sidebar'
 import mainView from '~/components/mainView'

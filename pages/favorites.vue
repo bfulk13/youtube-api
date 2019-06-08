@@ -31,6 +31,7 @@ export default {
     }
   },
   beforeMount() {
+    // #Lifecycle hook
     this.$store.commit('ORDER_BY_TITLE')
     this.$store.commit('ORDER_BY_DATE')
     this.$store.commit('ORDER_LENGTH_SHORT')

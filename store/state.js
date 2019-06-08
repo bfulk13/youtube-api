@@ -1,3 +1,5 @@
+// #store state for Vuex with NUXT
+
 export default () => ({
   user: null,
   vidArray: [],
