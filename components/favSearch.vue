@@ -26,7 +26,6 @@ export default {
       return txt
     },
     filterFavs(search) {
-      console.log({ search })
       this.$bus.$emit(
         'filterFavs',
         search && this.$store.commit('FILTER_FAVS', search)
