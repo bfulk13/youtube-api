@@ -1,9 +1,9 @@
 <template>
   <div>
     <iframe :src="favMainVidUrl" style="height: 600px; width: 900px;"></iframe>
-    <h2 class="video-title">{{getFavArray > 0 ? getCurrFavObj.snippet.title : ''}}</h2>
-    <p class="video-description">{{getFavArray > 0 ? getCurrFavObj.snippet.description : ''}}</p>
-    <v-btn @click="changeFav(getCurrFavObj)" flat>
+    <h2 class="video-title">{{favObj.snippet.title || ''}}</h2>
+    <p class="video-description">{{favObj.snippet.description || ''}}</p>
+    <v-btn @click="changeFav(favObj)" flat>
       <i class="material-icons">{{ getFavArray.length > 0 ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>
   </div>
@@ -14,7 +14,9 @@ import Vuex from 'vuex'
 
 export default {
   data: () => {
-    return {}
+    return {
+      favObj: {}
+    }
   },
   methods: {
     changeFav(video) {
@@ -23,6 +25,9 @@ export default {
         this.$store.commit('REMOVE_FAV', video)
       )
     }
+  },
+  mounted() {
+    console.log('hit')
   },
   computed: {
     favMainVidUrl() {
@@ -36,22 +41,26 @@ export default {
     }
   },
   created() {
-    this.$bus.$on('favFavChange', () => {
-      return this.$store.getters.getFavArray, this.$store.getters.getCurrFavObj
-    })
+    ;(this.favObj = this.$store.getters.getCurrFavObj),
+      this.$bus.$on('favFavChange', () => {
+        return (this.favObj = this.$store.getters.getCurrFavObj)
+      })
     this.$bus.$on('favChange', () => {
-      return this.$store.getters.getCurrFavObj
+      return (this.favObj = this.$store.getters.getCurrFavObj)
     })
-  }
+  },
+  watch: {}
 }
 </script>
 
 <style scoped>
 .video-title {
   margin: 20px;
+  color: #111;
 }
 
 .video-description {
   margin: 20px;
+  color: #111;
 }
 </style>
