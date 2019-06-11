@@ -13,13 +13,13 @@
     <h3 class="search-result">Favorites:</h3>
 
     <!-- #list and keys along with #inline styling -->
-    <div v-for="video in favArray">
+
+    <div v-for="video in favArray" :key="video.id.videoId">
       <fav-card
         style="width: 400px;"
         :video="video"
         :videoId="video.id.videoId"
         :thumbnail="video.snippet.thumbnails.medium.url"
-        :key="video.id.videoId"
       />
     </div>
   </div>
