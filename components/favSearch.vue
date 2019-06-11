@@ -17,15 +17,13 @@ export default {
     }
   },
   methods: {
-    filterFavs() {
-      return this.cleanText(this.searchFavs)
-    },
     cleanText(text) {
       let txt = text.toLowerCase().trim()
       txt = txt.replace(/ +/g, '')
       return txt
     },
     filterFavs(search) {
+      this.cleanText(search)
       this.$bus.$emit(
         'filterFavs',
         search && this.$store.commit('FILTER_FAVS', search)
