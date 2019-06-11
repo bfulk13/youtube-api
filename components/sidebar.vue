@@ -1,7 +1,7 @@
 <template>
   <div class="vidArray-container">
     <h3 class="search-result">Results for: {{ $route.params.id || 'funny' }}</h3>
-    <div v-for="video in $store.state.vidArray">
+    <div v-for="video in $store.state.vidArray" :key="video.id.videoId">
       <card
         style="width: 400px;"
         :video="video"
@@ -9,7 +9,6 @@
         :description="video.snippet.description"
         :videoId="video.id.videoId"
         :thumbnail="video.snippet.thumbnails.medium.url"
-        :key="video.id.videoId"
       />
     </div>
   </div>
