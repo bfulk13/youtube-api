@@ -6,9 +6,6 @@ export default {
   SET_VIDS(state, payload) {
     state.vidArray = payload
   },
-  SET_FAV_VIDS(state, payload) {
-    state.favorites = payload
-  },
   SET_MAIN_VID(state, payload) {
     state.mainVid = payload
   },
