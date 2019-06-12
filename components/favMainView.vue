@@ -1,8 +1,8 @@
 <template>
   <div>
     <iframe :src="favMainVidUrl" style="height: 600px; width: 900px;"></iframe>
-    <h2 class="video-title">{{favObj.snippet.title || ''}}</h2>
-    <p class="video-description">{{favObj.snippet.description || ''}}</p>
+    <h2 class="video-title">{{favObj.fav ? favObj.snippet.title : ''}}</h2>
+    <p class="video-description">{{favObj.fav ? favObj.snippet.description : ''}}</p>
     <v-btn @click="changeFav(favObj)" flat>
       <i class="material-icons">{{ getFavArray.length > 0 ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>
