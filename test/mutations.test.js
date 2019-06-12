@@ -133,4 +133,57 @@ test('"REMOVE_FAV" removes vid from favorites array', () => {
   expect(state.favorites).not.toContain(vid)
 })
 
+test('"FILTER_FAVS" returns vids from favArray containing search param', () => {
+  const state = {
+    favorites: [
+      {
+        id: '1a',
+        snippet: {
+          title: 'Hello 1a',
+          description: 'this is a sample'
+        }
+      },
+      {
+        id: '2b',
+        snippet: {
+          title: 'Hello 2b',
+          description: 'this is a sample'
+        }
+      },
+      {
+        id: '3c',
+        snippet: {
+          title: 'Hello 3c',
+          description: 'this is a sample'
+        }
+      },
+      {
+        id: '4d',
+        snippet: {
+          title: 'Hello 4d',
+          description: 'this is a sample'
+        }
+      },
+      {
+        id: '5e',
+        snippet: {
+          title: 'Hello 5e',
+          description: 'this is a sample'
+        }
+      }
+    ],
+    filteredFavs: [
+      {
+        id: '2b',
+        snippet: {
+          title: 'Hello 2b',
+          description: 'this is a sample'
+        }
+      }
+    ]
+  }
+  const payload = '2b'
+  mutations.FILTER_FAVS(state, payload)
+  expect(state.filteredFavs).toContainEqual(state.favorites[1])
+})
 

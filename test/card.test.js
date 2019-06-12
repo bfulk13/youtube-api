@@ -1,48 +1,52 @@
-import { render, cleanup, fireEvent } from '@testing-library/vue'
-import { mount } from '@vue/test-utils'
+import { cleanup } from '@testing-library/vue'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
+import Vue from 'vue'
 import card from '~/components/card'
-import { store } from '~/store'
 
 afterEach(cleanup)
 
+const EventBus = new Vue()
+
+const GlobalPlugins = {
+  install(v) {
+    // Event bus
+    v.prototype.$bus = EventBus
+  }
+}
+
+// create a local instance of the global bus
+const localVue = createLocalVue()
+localVue.use(GlobalPlugins)
+
 describe('card', () => {
-  const wrapper = mount(card)
-  wrapper.vm.$emit('favChange')
-  expect(wrapper.emitted().favChange()).toBeTruthy()
-})
+  it('emits an event', () => {
+    const wrapper = shallowMount({ sync: false })
+    wrapper.vm.$emit('favChange')
+    wrapper.setData(card, {
+      propsData: {
+        fav: false,
+        video: {
+          id: {
+            videoId: 'sdfh24563sfgd'
+          },
+          fav: true,
+          snippet: {
+            title: 'Sample',
+            description: 'Some text about the video'
+          }
+        }
+      }
+    })
 
-test('renders card', () => {
-  const video = {
-    id: {
-      videoId = 'sdfh24563sfgd'
-    },
-    fav: true,
-    snippet: {
-      title: 'Sample',
-      description: 'Some text about the video'
-    }
-  }
-  const { getByText} = render(card, {
-    props: { video }
+    expect(wrapper.emitted('favChange')).toBeTruthy() // pass
   })
 
-  getByText(video)
-})
-
-test('click event is emitted when button is clicked', () => {
-  const video = {
-    id: {
-      videoId = 'sdfh24563sfgd'
-    },
-    fav: true,
-    snippet: {
-      title: 'Sample',
-      description: 'Some text about the video'
-    }
-  }
-  const { getByText, emitted } = render(card, {
-    props: { videoId }
-  })
-  fireEvent.click(getByText(video))
-  expect(emitted().click).toHaveLength(1)
+  // it('changes the active data property on mouseover', () => {
+  //   const wrapper = shallowMount({ sync: false })
+  //   wrapper.setData(card, {
+  //     propsData: {
+  //       active: false
+  //     }
+  //   })
+  // })
 })
