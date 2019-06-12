@@ -32,10 +32,11 @@ export default {
   },
   beforeMount() {
     // #Lifecycle hook
-    this.$store.commit('ORDER_BY_TITLE')
-    this.$store.commit('ORDER_BY_DATE')
-    this.$store.commit('ORDER_LENGTH_SHORT')
-    this.$store.commit('ORDER_LENGTH_LONG')
+    this.$store.state.favorites.length > 0 &&
+      (this.$store.commit('ORDER_BY_TITLE'),
+      this.$store.commit('ORDER_BY_DATE'),
+      this.$store.commit('ORDER_LENGTH_SHORT'),
+      this.$store.commit('ORDER_LENGTH_LONG'))
   }
 }
 </script>
