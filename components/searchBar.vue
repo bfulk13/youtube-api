@@ -18,8 +18,9 @@ export default {
     }
   },
   methods: {
-    logSearch() {
+    logSearch(e) {
       let search = this.cleanText(this.textSearch)
+      this.submit(e)
     },
     cleanText(text) {
       let txt = text.toLowerCase().trim()
