@@ -89,7 +89,4 @@ export default {
 .vidCard:hover {
   cursor: pointer;
 }
-.material-icons {
-
-}
 </style>

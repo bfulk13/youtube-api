@@ -1,7 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import sinon from 'sinon'
 import Vue from 'vue'
-import card from '~/components/card'
+import favCard from '~/components/favCard'
 
 const EventBus = new Vue()
 
@@ -19,8 +19,8 @@ localVue.use(GlobalPlugins)
 describe('card', () => {
   it('emits an event', () => {
     const wrapper = shallowMount({ sync: false })
-    wrapper.vm.$emit('favChange')
-    wrapper.setData(card, {
+    wrapper.vm.$emit('favFavChange')
+    wrapper.setData(favCard, {
       propsData: {
         fav: false,
         video: {
@@ -36,12 +36,12 @@ describe('card', () => {
       }
     })
 
-    expect(wrapper.emitted('favChange')).toBeTruthy()
+    expect(wrapper.emitted('favFavChange')).toBeTruthy()
   })
 
   it('data property "active" should change on mouseover and mouseout', () => {
     const spy = sinon.spy()
-    const wrapper = shallowMount(card, {
+    const wrapper = shallowMount(favCard, {
       localVue,
       propsData: {
         active: spy,

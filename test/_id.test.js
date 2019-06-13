@@ -1,10 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
 import _id from '~/pages/search/_id'
 
-
 describe('_id', () => {
-
-  it('renders with search param', () => {
+  it('renders with search param path', () => {
     const $route = { path: '/some/path' }
     const wrapper = shallowMount(_id, {
       mocks: {

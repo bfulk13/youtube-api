@@ -1,11 +1,123 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import getters from '~/store/getters'
-import card from '~/components/card'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
+
+const vidArray = [
+  {
+    id: {
+      videoId: '1a'
+    },
+    snippet: {
+      title: 'Hello 1a',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '2b'
+    },
+    snippet: {
+      title: 'Hello 2b',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '3c'
+    },
+    snippet: {
+      title: 'Hello 3c',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '4d'
+    },
+    snippet: {
+      title: 'Hello 4d',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '5e'
+    },
+    snippet: {
+      title: 'Hello 5e',
+      description: 'this is a sample'
+    }
+  }
+]
+const mainVid = '3c'
+const favorites = [
+  {
+    id: {
+      videoId: '1a'
+    },
+    fav: true,
+    snippet: {
+      title: 'Hello 1a',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '3c'
+    },
+    fav: true,
+    snippet: {
+      title: 'Hello 3c',
+      description: 'this is a sample'
+    }
+  },
+  {
+    id: {
+      videoId: '5e'
+    },
+    fav: true,
+    snippet: {
+      title: 'Hello 5e',
+      description: 'this is a sample'
+    }
+  }
+]
+const filteredFavs = [
+  {
+    id: {
+      videoId: '1a'
+    },
+    fav: true,
+    snippet: {
+      title: 'Hello 1a',
+      description: 'this is a sample'
+    }
+  }
+]
+const favMainVid = '5e'
+const currFavObj = {
+  id: {
+    videoId: '5e'
+  },
+  fav: true,
+  snippet: {
+    title: 'Hello 5e',
+    description: 'this is a sample'
+  }
+}
+
+const state = {
+  vidArray,
+  mainVid,
+  favorites,
+  filteredFavs,
+  favMainVid,
+  currFavObj
+}
 
 describe('getters', () => {
   let getters
@@ -14,26 +126,7 @@ describe('getters', () => {
   beforeEach(() => {
     getters = {
       mainVidId: () => 'sdh23564dshg',
-      getVidProps: () => {
-        // id: {
-        //   videoId: 'sdh23564dshg'
-        // },
-        // snippet: {
-        //   title: 'Sample',
-        //   description: 'This is some text'
-        // }
-      },
-      getFavVidProps: () => {
-        // id: {
-        //   videoId: 'sdh23564dshg'
-        // },
-        // fav: true,
-        // snippet: {
-        //   title: 'Sample',
-        //   description: 'This is some text'
-        // }
-      },
-      getFavArray: () => []
+      favMainVid: () => '3c'
     }
 
     store = new Vuex.Store({
@@ -45,7 +138,42 @@ describe('getters', () => {
     expect('mainVidId').toMatch(/mainVidId/)
   })
 
-  // test('"getVidProps" returns an object', () => {
-  //  expect('getVidProps').toBeInstanceOf(Object)
-  // })
+  test('"getFavMainVid" should return a string', () => {
+    expect('favMainVid').toMatch(/favMainVid/)
+  })
+})
+
+describe('getVidProps', () => {
+  it('should return the object with matching mainVidId', () => {
+    const actual = getters.getVidProps(state)
+    expect(actual).toEqual([vidArray[2]])
+  })
+})
+
+describe('getFavVidProps', () => {
+  it('should return the object with matching favMainVid ID', () => {
+    const actual = getters.getFavVidProps(state)
+    expect(actual).toEqual([favorites[2]])
+  })
+})
+
+describe('getFavArray', () => {
+  it('should return the favorites array', () => {
+    const actual = getters.getFavArray(state)
+    expect(actual).toEqual(favorites)
+  })
+})
+
+describe('getCurrFavObj', () => {
+  it('should return the string on state', () => {
+    const actual = getters.getCurrFavObj(state)
+    expect(actual).toEqual(currFavObj)
+  })
+})
+
+describe('filterFavs', () => {
+  it('should return objects that match search params stored on state as an array', () => {
+    const actual = getters.filterFavs(state)
+    expect(actual).toEqual(filteredFavs)
+  })
 })
