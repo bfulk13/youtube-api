@@ -41,7 +41,7 @@ export default {
     favCard
   },
   computed: {
-    ...mapGetters(['filterOrder', 'filterFavs', 'getFavArray'])
+    ...mapGetters(['filterFavs', 'getFavArray'])
   },
   methods: {
     handleFilter: function(val) {
@@ -79,7 +79,7 @@ export default {
     // #async/await function -- promise
     filter: async function(newVal, oldVal) {
       await this.handleFilter(newVal)
-      this.favArray = this.$store.getters.filterOrder
+      this.favArray = this.$store.getters.getFavArray
     }
   }
 }

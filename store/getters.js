@@ -9,7 +9,7 @@ export default {
   },
   getFavVidProps: state => {
     return state.favorites.filter(fav => {
-      return fav.id.videoId.includes(state.FavMainVid)
+      return fav.id.videoId.includes(state.favMainVid)
     })
   },
   getFavArray: state => {
@@ -23,8 +23,5 @@ export default {
   },
   filterFavs: state => {
     return state.filteredFavs
-  },
-  filterOrder: state => {
-    return state.favorites
   }
 }
