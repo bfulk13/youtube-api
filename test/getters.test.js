@@ -145,35 +145,35 @@ describe('getters', () => {
 
 describe('getVidProps', () => {
   it('should return the object with matching mainVidId', () => {
-    const actual = getters.getVidProps(state)
+    let actual = getters.getVidProps(state)
     expect(actual).toEqual([vidArray[2]])
   })
 })
 
 describe('getFavVidProps', () => {
   it('should return the object with matching favMainVid ID', () => {
-    const actual = getters.getFavVidProps(state)
+    let actual = getters.getFavVidProps(state)
     expect(actual).toEqual([favorites[2]])
   })
 })
 
 describe('getFavArray', () => {
   it('should return the favorites array', () => {
-    const actual = getters.getFavArray(state)
+    let actual = getters.getFavArray(state)
     expect(actual).toEqual(favorites)
   })
 })
 
 describe('getCurrFavObj', () => {
   it('should return the string on state', () => {
-    const actual = getters.getCurrFavObj(state)
+    let actual = getters.getCurrFavObj(state)
     expect(actual).toEqual(currFavObj)
   })
 })
 
 describe('filterFavs', () => {
   it('should return objects that match search params stored on state as an array', () => {
-    const actual = getters.filterFavs(state)
+    let actual = getters.filterFavs(state)
     expect(actual).toEqual(filteredFavs)
   })
 })
