@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import index from '~/pages/index'
 
 describe('index', () => {
@@ -24,19 +24,18 @@ describe('index', () => {
     expect(wrapper.vm.$route.path).toBe($route.path)
   })
 
-  // jest.useFakeTimers()
-  // it('calls the callback after 1.5 seconds', () => {
-  //   const callback = jest.fn()
+  test('mounts properly', () => {
+    const wrapper = shallowMount(index)
+    expect(wrapper.isVueInstance()).toBeTruthy()
+  })
 
-
-  //   // At this point in time, the callback should not have been called yet
-  //   expect(callback).not.toBeCalled()
-
-  //   // Fast-forward until all timers have been executed
-  //   jest.advanceTimersByTime(1500)
-
-  //   // Now our callback should have been called!
-  //   expect(callback).toBeCalled()
-  //   expect(callback.mock.calls.length).toBe(1)
-  // })
+  test('calls checkForm on submit', () => {
+    const wrapper = shallowMount(index)
+    const checkFormMock = jest.fn()
+    wrapper.setMethods({
+      checkForm: checkFormMock
+    })
+    wrapper.find('form').trigger('submit')
+    expect(checkFormMock).toHaveBeenCalled()
+  })
 })

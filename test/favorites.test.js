@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import favorites from '~/pages/favorites'
 
@@ -52,7 +52,7 @@ describe('favorites', () => {
   const wrapper = shallowMount(favorites, {
     localVue,
     store
-  });
+  })
 
   it('renders a div', () => {
     const $route = { path: '/favorites' }
@@ -64,5 +64,18 @@ describe('favorites', () => {
       }
     })
     expect(wrapper.vm.$route.path).toBe($route.path)
+  })
+
+  it('"logout" should make user null', () => {
+    const wrapper = shallowMount(favorites, {
+      localVue,
+      store: {
+        state: {
+          user: 'test'
+        }
+      }
+    })
+    wrapper.find('button').trigger('click')
+    expect(user).toBe(null)
   })
 })
