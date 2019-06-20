@@ -1,34 +1,49 @@
+import { createLocalVue } from '@vue/test-utils'
+import Vuex from 'vuex'
+import actions from '~/store/actions'
+import mutations from '~/store/mutations'
+
+const localVue = createLocalVue()
+
+localVue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    favorites: [
+      {
+        id: {
+          videoId: 'Dd7FixvoKBw'
+        },
+        snippet: {
+          title: 'Hello 1a',
+          description: 'this is a sample'
+        }
+      }
+    ],
+    currFavObj: {}
+  },
+  mutations: mutations,
+  actions: actions
+})
+
 describe('setVidLength', () => {
   test('should set video length', async () => {
-    const commit = jest.fn()
     const Obj = {
-      id: 'sdgf2345',
-      totalSecs: '333',
-      length: '0:05:33'
+      id: {
+        videoId: 'Dd7FixvoKBw'
+      },
+      length: '0:03:02',
+      snippet: {
+        title: 'Hello 1a',
+        description: 'this is a sample'
+      },
+      totalSecs: 182
     }
 
-    let url = ''
-    let body = {
-      id: 'sdgf2345',
-      totalSecs: '333',
-      length: '0:05:33'
-    }
+    jest.mock('axios')
 
-    await jest.mock('axios', () => ({
-      get: (_url, _body) => {
-        return new Promise(resolve => {
-          url = _url
-          body = _body
-          Obj === body ? resolve(true) : resolve(false)
-        })
-      }
-    }))
+    await actions.setVidLength(store, 'Dd7FixvoKBw')
 
-    // console.log(Obj)
-    // console.log(body)
-    // expect(Obj.length).toBe(body.length)
-
-    // expect(body).toStrictEqual({ Obj })
-    // expect(commit).toHaveBeenCalledWith('SET_VID_LENGTH', Obj)
+    expect(store.state.favorites[0]).toStrictEqual(Obj)
   })
 })

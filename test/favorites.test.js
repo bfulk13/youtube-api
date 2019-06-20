@@ -44,7 +44,8 @@ const store = new Vuex.Store({
           description: 'this is a sample'
         }
       }
-    ]
+    ],
+    user: 'test'
   }
 })
 
@@ -65,17 +66,23 @@ describe('favorites', () => {
     })
     expect(wrapper.vm.$route.path).toBe($route.path)
   })
+})
 
-  it('"logout" should make user null', () => {
-    const wrapper = shallowMount(favorites, {
-      localVue,
-      store: {
-        state: {
-          user: 'test'
-        }
-      }
-    })
-    wrapper.find('button').trigger('click')
-    expect(user).toBe(null)
+test('"logout" should make user null', () => {
+  const wrapper = shallowMount(favorites, {
+    localVue,
+    store,
+    mocks: { $router: ['/'] }
   })
+  const mock = jest.fn()
+  mock.mockReturnValue((store.state.user = null))
+
+  const mockRoute = jest.fn()
+  mockRoute.mockReturnValue(['/'])
+
+  wrapper.find('button').trigger('click')
+  expect(mock('SET_USER')).toBe(null)
+  expect(mock).toHaveBeenCalledWith('SET_USER')
+  expect(mockRoute('/')).toStrictEqual(['/'])
+  expect(mockRoute).toHaveBeenCalledWith('/')
 })

@@ -25,7 +25,6 @@ export default {
         }`
       )
       const { duration } = res.data.items[0].contentDetails
-
       let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
 
       match = match.slice(1).map(function(x) {
