@@ -24,8 +24,8 @@ export default {
           process.env.apiKey
         }`
       )
+      // https://www.googleapis.com/youtube/v3/videos?id=Dd7FixvoKBw&t=4s&part=contentDetails&key=AIzaSyBIWrYjkvbuyZoWAYkJ6zXLuMv_-nkz4J0
       const { duration } = res.data.items[0].contentDetails
-
       let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
 
       match = match.slice(1).map(function(x) {

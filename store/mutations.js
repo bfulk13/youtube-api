@@ -21,6 +21,7 @@ export default {
   SET_VID_LENGTH(state, payload) {
     // #destructuring
     const { totalSecs, length, id } = payload
+    console.log({payload})
     // #spread operator
     let newArr = [...state.favorites]
     // #map function

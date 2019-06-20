@@ -7,7 +7,7 @@
     <favSidebar style="float: right; margin: 20px"/>
   </div>
 </template>
-  
+
 <script>
 import favSearch from '~/components/favSearch'
 import favMainView from '~/components/favMainView'
