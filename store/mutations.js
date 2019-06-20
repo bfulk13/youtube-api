@@ -21,17 +21,15 @@ export default {
   SET_VID_LENGTH(state, payload) {
     // #destructuring
     const { totalSecs, length, id } = payload
-    console.log({payload})
     // #spread operator
     let newArr = [...state.favorites]
-    // #map function
     newArr.map((fav, i) => {
       const { videoId } = fav.id
       // #es6 spread/rest operator
-      id === videoId && newArr.splice(i, 1, { ...fav, totalSecs, length })
+      id === videoId ? newArr.splice(i, 1, { ...fav, totalSecs, length }) : fav
     })
     state.currFavObj = newArr[0]
-    return (state.favorites = newArr)
+    state.favorites = newArr
   },
   REMOVE_FAV(state, payload) {
     let newArr = []
