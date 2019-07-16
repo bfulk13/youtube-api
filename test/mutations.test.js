@@ -464,6 +464,7 @@ describe('mutations', () => {
     }
 
     mutations.ORDER_LENGTH_LONG(state)
+    expect(state.favorites).toBeInstanceOf(Array)
     expect(state.favorites[0]).toStrictEqual(titleOne)
   })
 })

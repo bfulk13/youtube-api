@@ -4,7 +4,7 @@
     <button @click="logout">Logout</button>
     <favSearch/>
     <favMainView style="float: left; margin: 20px;"/>
-    <favSidebar style="float: right; margin: 20px"/>
+    <favSidebar style="float: right; margin: 20px;"/>
   </div>
 </template>
 
