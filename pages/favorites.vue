@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Favorites Route</h1>
-    <button @click="logout">Logout</button>
+    <v-btn @click="logout">Logout</v-btn>
     <favSearch/>
     <favMainView style="float: left; margin: 20px;"/>
     <favSidebar style="float: right; margin: 20px;"/>

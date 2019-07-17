@@ -20,7 +20,7 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
-# STG YouTuber
+# Mock YouTuber
 
 ## A STG Vue Certification Module
 
@@ -73,7 +73,7 @@ As you complete tasks, change the numbers boxes to `[x]`. (ex: `1.` -> `[x]`). T
 
 1. This project will use the YouTube Search API. To work with this api you will need to obtain an API key. Save your api key in a new file for use later in this project (Add a Youtube API readme).
 
-1. Create a header component. Include an element that says "STG YouTuber". This component should be at the top of every page in this app and centered on the page.
+1. Create a header component. Include an element that says "Mock YouTuber". This component should be at the top of every page in this app and centered on the page.
 
 **Note:** If you used any CLI to create your Vue app then you may need to remove any code or files that were created through this process that you feel are unnecessary.
 

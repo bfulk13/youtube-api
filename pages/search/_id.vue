@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1>Search Route</h1>
-    <button @click="logout">Logout</button>
-    <searchBar/>
-    <mainView style="float: left; margin: 2rem;"/>
-    <sidebar style="float: right; margin: 2rem"/>
+    <div class="button-container">
+    <v-btn class="logout-btn" @click="logout">Logout</v-btn>
+    </div>
+    <searchBar />
+    <mainView style="float: left; margin: 2rem;" />
+    <sidebar style="float: right; margin: 2rem" />
   </div>
 </template>
 
@@ -35,4 +36,12 @@ export default {
 </script>
 
 <style scoped>
+.button-container {
+  display: flex;
+}
+.logout-btn {
+  background: lightblue;
+  display: flex;
+  justify-content: center;
+}
 </style>

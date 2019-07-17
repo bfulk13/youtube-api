@@ -8,7 +8,7 @@
       </span>
     </nav>
     <div class="header-container">
-      <h1>STG YouTuber</h1>
+      <h1>Mock YouTuber</h1>
     </div>
   </div>
 </template>
