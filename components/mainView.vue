@@ -1,8 +1,8 @@
 <template>
   <div>
-    <iframe :src="mainVidUrl" style="height: 600px; width: 900px;"></iframe>
-    <h2 style="margin: 20px;">{{getVidProps.snippet.title}}</h2>
-    <p style="margin: 20px;">{{getVidProps.snippet.description}}</p>
+    <iframe :src="mainVidUrl" style="height: 500px; width: 800px;"></iframe>
+    <h2 style="margin: 20px; width: 800px;">{{getVidProps.snippet.title}}</h2>
+    <p style="margin: 20px; width: 800px;">{{getVidProps.snippet.description}}</p>
     <v-btn @click="changeFav(getVidProps)" flat>
       <i class="material-icons">{{ fav || getVidProps.fav ? 'favorite' : 'favorite_border' }}</i>
     </v-btn>

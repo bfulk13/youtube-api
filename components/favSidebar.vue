@@ -3,7 +3,7 @@
     Filter by:
     <form @submit.prevent="handleFilter">
       <!-- #inline style -->
-      <select style="font-size: 18px;" v-model="filter">
+      <select style="font-size: 18px; border: 1px solid #777; padding: 5px; margin-top: 5px;" v-model="filter">
         <option value="title">Title</option>
         <option value="date">Recent</option>
         <option value="length short">Short Video Length</option>
@@ -88,7 +88,7 @@ export default {
 <style scoped>
 /* #scoped style */
 .vidArray-container {
-  margin: 0 20px 0 0;
+  margin-bottom: 20px;
 }
 .search-result {
   margin: 20px;

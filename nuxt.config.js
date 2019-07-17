@@ -3,11 +3,16 @@ const pkg = require('./package')
 module.exports = {
   mode: 'universal',
 
+  generate: {
+    routes: [
+      
+    ]
+  },
   /*
    ** Headers of the page
    */
   head: {
-    title: 'STG YouTuber',
+    title: 'Mock YouTuber',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -42,7 +47,8 @@ module.exports = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/vuetify'
   ],
   /*
    ** Axios module configuration
